@@ -20,16 +20,13 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::post('/register ', [AuthController::class, 'register']);
+Route::post('register ', [AuthController::class, 'register']);
 Route::post('/login ', [AuthController::class, 'login']);
 
 Route::get('/todos', [TodosController::class, 'index']);
 Route::resource('todos', TodosController::class);
 
-
-
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/todos', [TodosController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
-
 });
