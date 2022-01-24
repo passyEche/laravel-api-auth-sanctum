@@ -24,9 +24,16 @@ Route::post('register ', [AuthController::class, 'register']);
 Route::post('/login ', [AuthController::class, 'login']);
 
 Route::get('/todos', [TodosController::class, 'index']);
+Route::get('/todos/{todo}', [TodosController::class, 'show']);
+
+
 Route::resource('todos', TodosController::class);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/todos', [TodosController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::put('/todos/{todo}', [TodosController::class, 'update']);
+    Route::delete('/todos/{todo}', [TodosController::class, 'destroy']);
+
+
 });
